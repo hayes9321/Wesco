@@ -6,10 +6,15 @@ const styles = {
   nav: { 
     flex: 1,
     height: 60,
-    width: 375,
     padding: 6,
     backgroundColor: 'white',
     alignItems: 'flex-end'
+  },
+  navMenu: { 
+  flex: 0,
+  padding: 9,
+  backgroundColor: 'white',
+  alignItems: 'flex-start'
   }
 };
 

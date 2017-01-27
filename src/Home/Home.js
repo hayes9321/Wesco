@@ -22,20 +22,18 @@ class Home extends Component {
     return (
       <View style={{ backgroundColor: '#006bb6'}} >
       <Navbar />
-      <Text style={{height: 120, fontSize: 40, backgroundColor: '#006bb6', color: 'white' }}>Please select Item</Text>
-        <ScrollView style={{ backgroundColor: 'white', height: 350, margin: 2}}>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-          <Text style={{height: 50, fontSize: 20, borderWidth: 1}}>Item</Text>
-        </ScrollView> 
-          <TouchableOpacity style={{ height: 50, margin: 20, backgroundColor: "#e86c4a", borderWidth: 1, borderColor: 'white' }}>
-              <Text style={{paddingTop: 6, textAlign: 'center', color: 'white', fontSize: 20}}>My button</Text>
-          </TouchableOpacity>
+      <ScrollView>
+      <Text style={{height: 70, fontSize: 40, backgroundColor: '#006bb6', color: 'white', textAlign: 'center', marginTop: 10 }}>Choose A Service</Text>
+        <Text style={{height: 70, fontSize: 20, borderWidth: 1, borderColor: 'white', margin: 4, fontSize: 30, backgroundColor:'white'}}>Charges & Fees </Text>
+        <Text style={{height: 70, fontSize: 20, borderWidth: 1, borderColor: 'white', margin: 4, fontSize: 30, backgroundColor:'white'}}>Fireplaces</Text>
+        <Text style={{height: 70, fontSize: 20, borderWidth: 1, borderColor: 'white', margin: 4, fontSize: 30, backgroundColor:'white'}}>Generators</Text>
+        <Text style={{height: 70, fontSize: 20, borderWidth: 1, borderColor: 'white', margin: 4, fontSize: 30, backgroundColor:'white'}}>HVAC</Text>
+        <Text style={{height: 70, fontSize: 20, borderWidth: 1, borderColor: 'white', margin: 4, fontSize: 30, backgroundColor:'white'}}>Tankless</Text>
+        
+        <TouchableOpacity style={{ height: 50, margin: 20, backgroundColor: "#e86c4a", borderWidth: 1, borderColor: 'white' }}>
+            <Text style={{paddingTop: 6, textAlign: 'center', color: 'white', fontSize: 20}}>My button</Text>
+        </TouchableOpacity>
+      </ScrollView>
       </View>
     )
   }c
