@@ -1,30 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+const { AppRegistry } = require('react-native');
+const setup = require('./app/setup');
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Image,
-  StyleSheet,
-  ScrollView,
-  Text,
-  TextInput,
-  View
-} from 'react-native';
-import Home from './src/Home';
-
-
-
-class WescoApp extends Component {
-  render() {
-    return (
-      <Home />
-    )
-  }
-}
-
-
-AppRegistry.registerComponent('WescoApp', () => WescoApp);
+AppRegistry.registerComponent('WescoApp', setup);
