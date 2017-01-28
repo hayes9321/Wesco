@@ -10,7 +10,7 @@ export default StyleSheet.create({
 		margin: 50,
 	},
 	toolbar: {
-		backgroundColor: '#E9EAED',
+		backgroundColor: '#fff',
 		height: 56,
 	}
 });
