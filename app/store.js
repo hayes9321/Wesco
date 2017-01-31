@@ -1,10 +1,12 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { fromJS } from 'immutable';
 import createReducer from './reducers';
 import devTools from 'remote-redux-devtools';
+import createLogger from 'redux-logger';
 
+const loggerMiddleware = createLogger();
 function configureStore(initialState = fromJS({ })) {
-	const createStoreWithMiddleware = compose(devTools())(createStore);
+	const createStoreWithMiddleware = compose(applyMiddleware(loggerMiddleware), devTools())(createStore);
 	return createStoreWithMiddleware(createReducer(), initialState);
 }
 

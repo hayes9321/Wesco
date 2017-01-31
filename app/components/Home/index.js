@@ -34,21 +34,19 @@ const data = [
 class Home extends Component {
 	render() {
 		const generateItem = (i) => (
-				<View style={styles.cell} key={i.key}>
-					<TouchableHighlight onPress={this.props.onSelectItem}>
-						<View style={styles.row}>
-							<View style={styles.textContainer}>
-								<Text style={styles.title} numberOfLines={2}>
-									{i.title}
-								</Text>
-								<Text numberOfLines={1}>
-									{i.description}
-								</Text>
-							</View>
+			<View style={styles.cell} key={i.key}>
+				<TouchableHighlight onPress={this.props.onSelectItem}>
+					<View style={styles.row}>
+						<View style={styles.textContainer}>
+							<Text style={styles.title} numberOfLines={2}>
+								{i.title}
+							</Text>
 						</View>
-					</TouchableHighlight>
-				</View>
+					</View>
+				</TouchableHighlight>
+			</View>
 		);
+		
 		return (
 			<View style={styles.container} >
 				<ScrollView automaticallyAdjustContentInsets={false}>

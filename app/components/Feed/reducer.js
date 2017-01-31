@@ -5,8 +5,8 @@ const initialState = {
 	index: 0,
 	routes: [
 		{
-			key: 'list',
-			title: 'Items'
+			key: 'home',
+			title: 'Home'
 		},
 	],
 };

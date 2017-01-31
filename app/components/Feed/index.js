@@ -1,8 +1,8 @@
 /*
 *
-* Feed
-*
-*/
+* Feed- Controls the presentaional components
+*				navigation logic.
+*/ 
 
 import { 
 	View, 
@@ -19,15 +19,20 @@ import Home from '../Home';
 import ItemDetails from '../ItemDetails';
 import { actions } from 'react-native-navigation-redux-helpers';
 
+
+//Defining actions
 const {
   popRoute,
   pushRoute
 } = actions;
 
+
 const {
 	Header: NavigationHeader,
 	CardStack: NavigationCardStack
 } = NavigationExperimental;
+
+console.log(NavigationExperimental)
 const NavigationHeaderBackButton = require('NavigationHeaderBackButton');
 
 class Feed extends Component {
@@ -95,7 +100,7 @@ class Feed extends Component {
 	}
 
 	_renderRightComponent(props) {
-		if (props.scene.route.key === 'list') {
+		if (props.scene.route.key === 'home') {
 			return (
 				<TouchableHighlight onPress={this._onAddItem}>
 					<Text style={styles.button}>+</Text>
@@ -107,7 +112,7 @@ class Feed extends Component {
 	}
 
 	_renderScene(props) {
-		if (props.scene.route.key === 'list') {
+		if (props.scene.route.key === 'home') {
 			return (
 				<View style={ styles.container }>
 				<Text style={ styles.welcomeMsg }>Select A Service</Text>
@@ -121,10 +126,8 @@ class Feed extends Component {
 
 		if (props.scene.route.key === 'details') {
 			return (
-				<View style={{ marginTop: NavigationHeader.HEIGHT }}>
-					<View style={ styles.container }>
-						<ItemDetails />
-					</View>
+				<View style={{flex:1}}>		
+					<ItemDetails />
 				</View>
 			);
 		}
@@ -132,7 +135,8 @@ class Feed extends Component {
 
 	_onAddItem() {
 		const { dispatch } = this.props;
-
+		
+		//intiate dispatch funtion for pushRoute.
 		dispatch(pushRoute({
 			key: 'new',
 			title: 'Main Screen',
@@ -143,6 +147,7 @@ class Feed extends Component {
 	_onSelectItem() {
 		const { dispatch, navigation } = this.props;
 
+		//intiate dispatch funtion for pushRoute.
 		dispatch(pushRoute({
 			key: 'details',
 			title: 'Item details',
