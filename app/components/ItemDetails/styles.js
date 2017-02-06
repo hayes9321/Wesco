@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   textContainer: {
     flex: 1,
+    height: 50
   },
   title: {
     flex: 1,
@@ -11,18 +12,14 @@ export default StyleSheet.create({
     marginBottom: 2,
   },
   row: {
-    alignItems: 'center',
     backgroundColor: 'white',
     flexDirection: 'row',
     padding: 5,
   },
-  cellImage: {
-    backgroundColor: '#dddddd',
-    height: 60,
-    marginRight: 10,
-    width: 60,
-  },
   cell: {
     borderBottomWidth: StyleSheet.hairlineWidth
+  },
+  description: {
+    margin: 10
   }
 });

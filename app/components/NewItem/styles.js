@@ -7,11 +7,6 @@ export default StyleSheet.create({
 		flexDirection: 'column',
 		justifyContent: 'center'
 	},
-	buttonContainer: {
-		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'center'
-	},
 	button: {
 		fontSize: 30,
 		paddingRight: 10,
