@@ -16,24 +16,27 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
-  rowTitle: { 
-    flexDirection:'row',
+  rowTitle: {
+    flex: 1,
     fontWeight: 'bold',
   },
   button: {
+    borderRadius: 5,
     flexGrow: 1,
-    height: 70,
+    height: 60,
+    alignSelf: 'stretch',
     overflow: 'hidden',
-    margin:5,
-    paddingTop:8,
   },
   buttonText: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 17,
     margin: 5,
   },
   modalButton: {
     marginTop: 10,
+  },
+  pickerItem: {
+    fontSize: 16,
   },
   itemSelect: {
     alignSelf: 'stretch',
@@ -50,5 +53,8 @@ export default StyleSheet.create({
   textStyle: {
     color: 'black',
     fontSize: 20,
+  },
+  colorStyle: {
+    color: 'black',
   },
 });

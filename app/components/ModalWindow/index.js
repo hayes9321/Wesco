@@ -30,23 +30,27 @@ class Button extends Component {
     this.setState({active: false});
   };
 
-  render() {
+  render(props) {
     var colorStyle = {
       color: this.state.active ? '#fff' : '#000',
     };
+
     return (
+
       <TouchableHighlight
         onHideUnderlay={this._onUnhighlight}
         onPress={this.props.onPress}
         onShowUnderlay={this._onHighlight}
         style={[styles.button, this.props.style]}
         underlayColor="#a9d9d4">
-          <Text style={[styles.buttonText, colorStyle]}>{this.props.children}</Text>
+        <View>
+          <Text style={[styles.rowTitle, colorStyle]}>{this.props.title}</Text>
+          <Text style={[styles.buttonText, colorStyle]}>{this.props.description}</Text>
+        </View>
       </TouchableHighlight>
     );
   }
 }
-
 
 class ModalWindow extends Component {
   state = {
@@ -62,6 +66,7 @@ class ModalWindow extends Component {
     super(props);
   }
 
+
   render(props) {
     var modalBackgroundStyle = {
       backgroundColor: this.state.transparent ? 'rgba(0, 0, 0, 0.5)' : '#f5fcff',
@@ -72,6 +77,7 @@ class ModalWindow extends Component {
     var activeButtonStyle = {
       backgroundColor: '#ddd'
     };
+
       return (
         <View>
           <Modal
@@ -81,31 +87,43 @@ class ModalWindow extends Component {
             >
             <View style={[styles.container, modalBackgroundStyle]}>
               <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
-                <Text>It is currently displayed in {this.props.children.key} happy mode.</Text>
+                
+                <Text style={styles.headerStyle}>{this.props.title}</Text>
+
+                <TouchableHighlight style={styles.itemSelect}>
+                  <Text style={styles.textStyle}>Club Price: ${this.props.clubPrice}</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.itemSelect}>
+                  <Text style={styles.textStyle}>Prefered Customer: ${this.props.prefCustPrice}</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.itemSelect}>
+                  <Text style={styles.textStyle}>Senior/Military: ${this.props.senMilPrice}</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={styles.itemSelect}>
+                  <Text style={styles.textStyle}>Retail: ${this.props.retailPrice}</Text>                
+                </TouchableHighlight>
+
                 <Button
                   onPress={this._setModalVisible.bind(this, false)}
                   style={styles.modalButton}>
-                  Close
+                  <Text style={{color: 'black'}}>Close</Text>
                 </Button>
               </View>
             </View>
           </Modal>
 
-          <Button onPress={this._setModalVisible.bind(this, true)}>
-            <Text>{this.props.children}</Text>
-          </Button>
+          <Button 
+            onPress={this._setModalVisible.bind(this, true)} 
+            title={this.props.title}
+            description = {this.props.description}
+          ></Button> 
+          
         </View>
       );
   }
 }
-
-
-exports.examples = [
-  {
-    title: 'Modal Presentation',
-    description: 'Modals can be presented with or without animation',
-    render: () => <Modal />,
-  },
-];
 
 export default ModalWindow;

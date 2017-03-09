@@ -11,22 +11,22 @@ import ModalWindow from '../ModalWindow';
 
 
 class NewItem extends Component {
-	render() {
-		return (
-			<View style={styles.container}>
-				<View style={styles.buttonContainer}>
-					<TouchableHighlight onPress={this.props.onClose}>
-						<Text style={styles.button}>XO</Text>
-					</TouchableHighlight>
-				</View>
-				<ModalWindow />
-			</View>
-		);
-	}
+  render() {
+    return (
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight onPress={this.props.onClose}>
+            <Text style={styles.button}>XO</Text>
+          </TouchableHighlight>
+        </View>
+        <ModalWindow />
+      </View>
+    );
+  }
 }
 
 NewItem.propTypes = {
-	onClose: React.PropTypes.func.isRequired
+  onClose: React.PropTypes.func.isRequired
 };
 
 export default NewItem;

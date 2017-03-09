@@ -1,21 +1,31 @@
 /*
 *
 * Feed- Controls the presentaional components
-*				navigation logic.
+*       navigation logic.
 */ 
 
 import { 
-	View, 
-	Platform, 
-	NavigationExperimental,
-	TouchableHighlight, 
-	Text,
-	TouchableOpacity 
+
+  View, 
+  Platform, 
+  NavigationExperimental,
+  TouchableHighlight, 
+  Text,
+  TouchableOpacity 
 } from 'react-native';
 import React, { Component } from 'react';
 import styles from './styles';
 import { connect } from 'react-redux';
-import Home from '../Home'; 
+import ChargesAndFees from '../ChargesAndFees';
+import ChargesAndFeesItems from '../ChargesAndFeesItems';  
+import Fireplaces from '../Fireplaces';
+import FireplaceItems from '../FireplaceItems';
+import Generators from '../Generators';
+import GeneratorItems from '../GeneratorItems';
+import Hvac from '../Hvac';
+import HvacItems from '../HvacItems';
+import Tankless from '../Tankless';
+import TanklessItems from '../TanklessItems';
 import ItemDetails from '../ItemDetails';
 import { actions } from 'react-native-navigation-redux-helpers';
 
@@ -28,144 +38,248 @@ const {
 
 
 const {
-	Header: NavigationHeader,
-	CardStack: NavigationCardStack
+  Header: NavigationHeader,
+  CardStack: NavigationCardStack
 } = NavigationExperimental;
 
-console.log(NavigationExperimental)
 const NavigationHeaderBackButton = require('NavigationHeaderBackButton');
 
 class Feed extends Component {
-	constructor() {
-		super();
+  constructor() {
+    super();
+    
+    // Set Event Handlers
+    this._onAddItem = this._onAddItem.bind(this);
+    this._renderTitleComponent = this._renderTitleComponent.bind(this);
+    this._renderLeftComponent = this._renderLeftComponent.bind(this);
+    this._renderRightComponent = this._renderRightComponent.bind(this);
+    this._renderScene = this._renderScene.bind(this);
+    this._renderHeader = this._renderHeader.bind(this);
+    this._onSelectItem = this._onSelectItem.bind(this);
+    this._onFireplaceSelect = this._onFireplaceSelect.bind(this);
+    this._onGeneratorSelect = this._onGeneratorSelect.bind(this);
+    this._onHvacSelect = this._onHvacSelect.bind(this);
+    this._onTanklessSelect = this._onTanklessSelect.bind(this);
+  }
 
-		this._onAddItem = this._onAddItem.bind(this);
-		this._renderTitleComponent = this._renderTitleComponent.bind(this);
-		this._renderLeftComponent = this._renderLeftComponent.bind(this);
-		this._renderRightComponent = this._renderRightComponent.bind(this);
-		this._renderScene = this._renderScene.bind(this);
-		this._renderHeader = this._renderHeader.bind(this);
-		this._onSelectItem = this._onSelectItem.bind(this);
-	}
+  render() {
+    return (
+      <NavigationCardStack
+        onNavigate={ () => {} }
+        direction={'horizontal'}
+        navigationState={this.props.navigation}
+        renderScene={this._renderScene}
+        renderHeader={this._renderHeader}
+        style={styles.main}
+      />
+    );
+  }
 
-	render() {
-		return (
-			<NavigationCardStack
-				onNavigate={ () => {} }
-				direction={'horizontal'}
-				navigationState={this.props.navigation}
-				renderScene={this._renderScene}
-				renderHeader={this._renderHeader}
-				style={styles.main}
-			/>
-		);
-	}
+  _renderHeader(props) {
+    const showHeader = props.scene.route.title &&
+      (Platform.OS === 'ios' || props.scene.route.key === 'details' || props.scene.route.key === 'FireplaceItems') 
+      || props.scene.route.key === 'Generator' || props.scene.route.key === 'Hvac' || props.scene.route.key === 'Tankless' ;
 
-	_renderHeader(props) {
-		const showHeader = props.scene.route.title &&
-			(Platform.OS === 'ios' || props.scene.route.key === 'details');
+    if (showHeader) {
+      return (
+        <NavigationHeader 
+          {...props}
+          renderTitleComponent={this._renderTitleComponent}
+          renderLeftComponent={this._renderLeftComponent}
+          renderRightComponent={this._renderRightComponent}
+        />
+      );
+    }
 
-		if (showHeader) {
-			return (
-				<NavigationHeader 
-					{...props}
-					renderTitleComponent={this._renderTitleComponent}
-					renderLeftComponent={this._renderLeftComponent}
-					renderRightComponent={this._renderRightComponent}
-				/>
-			);
-		}
+    return null;
+  }
 
-		return null;
-	}
+  _renderTitleComponent(props) {
+    return (
+      <NavigationHeader.Title>
+        {props.scene.route.title}
+      </NavigationHeader.Title>
+    );
+  }
 
-	_renderTitleComponent(props) {
-		return (
-			<NavigationHeader.Title>
-				{props.scene.route.title}
-			</NavigationHeader.Title>
-		);
-	}
+  _renderLeftComponent(props) {
 
-	_renderLeftComponent(props) {
-		const { dispatch, navigation } = this.props;
+    const { dispatch, navigation } = this.props;
 
-		if (props.scene.route.showBackButton) {
-			return (
-				<NavigationHeaderBackButton onPress={() => dispatch(popRoute(navigation.key))} />
-			);
-		}
+    if (props.scene.route.showBackButton) {
+      return (
+        <NavigationHeaderBackButton onPress={() => dispatch(popRoute(navigation.key))} />
+      );
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	_renderRightComponent(props) {
-		if (props.scene.route.key === 'home') {
-			return (
-				<TouchableHighlight onPress={this._onAddItem}>
-					<Text style={styles.button}>+</Text>
-				</TouchableHighlight>
-			);
-		}
+  _renderRightComponent(props) {
+    if (props.scene.route.key === 'home') {
+      return (
+        <TouchableHighlight onPress={this._onAddItem}>
+          <Text style={styles.button}>+</Text>
+        </TouchableHighlight>
+      );
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	_renderScene(props) {
-		if (props.scene.route.key === 'home') {
-			return (
-				<View style={ styles.container }>
-				<Text style={ styles.welcomeMsg }>Select A Service</Text>
-					<Home onSelectItem={this._onSelectItem} />
-				<TouchableOpacity style={ styles.priceButton }>
+  _renderScene(props) {
+    //Render home screen with Main Menus components
+    if (props.scene.route.key === 'home') {
+      return (
+        <View style={ styles.container }>
+        <Text style={ styles.welcomeMsg }>Select A Service</Text>
+          <ChargesAndFees onSelectItem={this._onSelectItem} />
+          <Fireplaces onSelectItem={this._onFireplaceSelect} />
+          <Generators onSelectItem={this._onGeneratorSelect} />
+          <Hvac onSelectItem={this._onHvacSelect} />
+          <Tankless onSelectItem={this._onTanklessSelect} />
+          
+        <TouchableOpacity style={ styles.priceButton }>
             <Text style={ styles.priceBtnTxt }>Get Price</Text>
         </TouchableOpacity>
-				</View>
-			);
-		}
+        </View>
+      );
+    }
+    
+////ROUTES//////////////////////////////////////////////////////
 
-		if (props.scene.route.key === 'details') {
-			return (
-				<View style={{flex:1}}>		
-					<ItemDetails />
-				</View>
-			);
-		}
-	}
+    if (props.scene.route.key === 'details') {
+      return (
+        <View style={{flex:1}}>   
+          <ItemDetails />
+        </View>
+      );
+    }
 
-	_onAddItem() {
-		const { dispatch } = this.props;
-		
-		//intiate dispatch funtion for pushRoute.
-		dispatch(pushRoute({
-			key: 'new',
-			title: 'Main Screen',
-			showBackButton: true
-		}, 'global'));
-	}
+    if (props.scene.route.key === 'ChargesAndFees') {
+      return (
+        <View style={{flex:1}}>   
+          <ItemDetails />
+        </View>
+      );
+    }
 
-	_onSelectItem() {
-		const { dispatch, navigation } = this.props;
+    if (props.scene.route.key === 'FireplaceItems') {
+      return (
+        <View style={{flex:1}}>   
+          <FireplaceItems />
+        </View>
+      );
+    }
 
-		//intiate dispatch funtion for pushRoute.
-		dispatch(pushRoute({
-			key: 'details',
-			title: 'Item details',
-			showBackButton: true
-		}, navigation.key));
-	}
+    if (props.scene.route.key === 'Generator') {
+      return (
+        <View style={{flex:1}}>   
+          <GeneratorItems />
+        </View>
+      )
+    }
+
+    if (props.scene.route.key === 'Hvac') {
+      return (
+        <View style={{flex:1}}>   
+          <HvacItems />
+        </View>
+      )
+    }
+
+    if (props.scene.route.key === 'Tankless') {
+      return (
+        <View style={{flex:1}}>   
+          <TanklessItems />
+        </View>
+      );
+    }
+  }
+
+//ACTIONS///////////////////////////////////////////
+
+
+  _onAddItem() {
+    const { dispatch } = this.props;
+    
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'new',
+      title: 'Main Screen',
+      showBackButton: true
+    }, 'global'));
+  }
+
+  //Pick a route
+  _onSelectItem() {
+    const { dispatch, navigation } = this.props;
+
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'details',
+      title: 'Item Details',
+      showBackButton: true
+    }, navigation.key));
+  }
+
+  _onFireplaceSelect() {
+    const { dispatch, navigation } = this.props;
+
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'FireplaceItems',
+      title: 'Fireplace Details',
+      showBackButton: true
+    }, navigation.key));
+
+  }
+
+  _onGeneratorSelect() {
+    const { dispatch, navigation } = this.props;
+
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'Generator',
+      title: 'Generator Details',
+      showBackButton: true
+    }, navigation.key));
+  }
+
+  _onHvacSelect() {
+    const { dispatch, navigation } = this.props;
+
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'Hvac',
+      title: 'Hvac Details',
+      showBackButton: true
+    }, navigation.key));
+    console.log('pressed');
+  }
+
+  _onTanklessSelect() {
+    const { dispatch, navigation } = this.props;
+
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'Tankless',
+      title: 'Tankless Details',
+      showBackButton: true
+    }, navigation.key));
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		dispatch
-	};
+  return {
+    dispatch
+  };
 }
 
 function mapStateToProps(state) {
-	return {
-		navigation: state.get('feed')
-	};
+  return {
+    navigation: state.get('feed')
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed);

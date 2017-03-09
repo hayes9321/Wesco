@@ -21,15 +21,15 @@ const {
 } = NavigationExperimental;
 
 class GlobalNavigation extends Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
-		this._renderHeader = this._renderHeader.bind(this);
-		this._renderScene = this._renderScene.bind(this);
-	}
+    this._renderHeader = this._renderHeader.bind(this);
+    this._renderScene = this._renderScene.bind(this);
+  }
 
-	render() {
-		return (
+  render() {
+    return (
       <NavigationCardStack
         onNavigate={ () => {} }
         style={styles.main}
@@ -37,50 +37,50 @@ class GlobalNavigation extends Component {
         renderHeader={this._renderHeader}
         renderScene={this._renderScene}
       />
-		);
-	}
+    );
+  }
 
-	_renderScene(props) {
-		if (props.scene.route.key === 'applicationTabs') {
-			return (
-				<View style={{flex: 1}}>
-					<ApplicationTabs />
-				</View>
-			);
-		}
+  _renderScene(props) {
+    if (props.scene.route.key === 'applicationTabs') {
+      return (
+        <View style={{flex: 1}}>
+          <ApplicationTabs />
+        </View>
+      );
+    }
 
-		if (props.scene.route.key === 'new') {
-			return (
-				<View style={{flex: 1}}>
-					<NewItem onClose={this._onCloseNewItem.bind(this)} />
-				</View>
-			);
-		}
-	}
+    if (props.scene.route.key === 'new') {
+      return (
+        <View style={{flex: 1}}>
+          <NewItem onClose={this._onCloseNewItem.bind(this)} />
+        </View>
+      );
+    }
+  }
 
-	_renderHeader(props) {
+  _renderHeader(props) {
     return null;
   }
 
-	_onCloseNewItem() {
+  _onCloseNewItem() {
     const { dispatch, navigation } = this.props;
     dispatch(popRoute(navigation.key));
-	}
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-	return {
-		dispatch,
-		onNavigate() {
-			console.log('@@ onNavigate', arguments);
-		}
-	};
+  return {
+    dispatch,
+    onNavigate() {
+      console.log('@@ onNavigate', arguments);
+    }
+  };
 }
 
 function mapStateToProps(state) {
-	return {
-		navigation: state.get('globalNavigation')
-	};
+  return {
+    navigation: state.get('globalNavigation')
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GlobalNavigation);

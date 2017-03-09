@@ -1,9 +1,3 @@
-/*
- *
- * ItemDetails
- *
- */
-
 import { View, Text, TouchableHighlight, Image, Modal, ScrollView} from 'react-native';
 import React, { Component } from 'react';
 import styles from './styles';
@@ -14,211 +8,154 @@ const data = [
     key: '01-001',
     title: 'Service Call Fee - Regular',
     description: 'Code: 01-001',
-    clubPrice: '84.00',
-    prefCustPrice: '89.00',
-    senMilPrice: '94.00',
-    retailPrice: '99.00',
+    price: '124.99',
   },
   {
     key: '01-002',
     title: 'Service Call Fee - Over Capacity',
     description: 'Code: 01-002',
-    clubPrice: '169.00',
-    prefCustPrice: '180.00',
-    senMilPrice: '189.00',
-    retailPrice: '199.00',
+    price: '124.99',
   },
   {
     key: '01-003',
     title: 'Service Call Fee - Generator',
     description: 'Code: 01-003',
-    clubPrice: '169.00',
-    prefCustPrice: '180.00',
-    senMilPrice: '189.00',
-    retailPrice: '199.00',
+    price: '124.99',
   },
   {
     key: '01-004',
     title: 'Service Call Fee - Generator, Over Capacity',
     description: 'Code: 01-004',
-    clubPrice: '254.00',
-    prefCustPrice: '270.00',
-    senMilPrice: '284.00',
-    retailPrice: '299.00',
+    price: '124.99',
   },
   {
     key: '01-005',
     title: 'Precision Tune Up - Heating',
     description: 'Code: 01-005',
-    clubPrice: '124.00',
-    prefCustPrice: '143.00',
-    senMilPrice: '151.00',
-    retailPrice: '159.00',
+    price: '124.99',
   },
   {
     key: '01-006',
     title: 'Precision Tune Up - Cooling',
     description: 'Code: 01-006',
-    clubPrice: '124.00',
-    prefCustPrice: '143.00',
-    senMilPrice: '151.00',
-    retailPrice: '159.00',
+    price: '124.99',
   },
   {
     key: '01-007',
     title: 'Precision Tune Up - Split System',
     description: 'Code: 01-007',
-    clubPrice: '209.00',
-    prefCustPrice: '243.00',
-    senMilPrice: '256.00',
-    retailPrice: '269.00',
+    price: '124.99',
   },
     {
     key: '01-008',
     title: 'Precision Tune Up - Gas Fireplace',
     description: 'Code: 01-008',
-    clubPrice: '119.00',
-    prefCustPrice: '134.00',
-    senMilPrice: '142.00',
-    retailPrice: '149.00',
+    price: '124.99',
   },
   {
     key: '01-009',
     title: 'Precision Tune Up - Tankless Hot Water',
     description: 'Code: 01-009',
-    clubPrice: '179.00',
-    prefCustPrice: '180.00',
-    senMilPrice: '189.00',
-    retailPrice: '199.00',
+    price: '124.99',
   },
   {
     key: '01-010',
     title: 'Precision Tune Up - Generator',
     description: 'Code: 01-010',
-    clubPrice: '319.00',
-    prefCustPrice: '360.00',
-    senMilPrice: '379.00',
-    retailPrice: '399.00',
+    price: '124.99',
   },
   {
     key: '01-011',
     title: 'Return Trip Charge (for repairs using van stock inventory)',
     description: 'Code: 01-011',
-    clubPrice: '84.00',
-    prefCustPrice: '89.00',
-    senMilPrice: '94.00',
-    retailPrice: '99.00',
+    price: '124.99',
   },
   {
     key: '01-012',
     title: 'Additional Labor Charge for repairs in attic/crawl',
     description: 'Code: 01-012',
-    clubPrice: '179.00',
-    prefCustPrice: '190.00',
-    senMilPrice: '200.00',
-    retailPrice: '210.00',
+    price: '124.99',
   },
   {
     key: '01-013',
     title: 'Labor - Additional Man, 1 Hour',
     description: 'Code: 01-013',
-    clubPrice: '179.00',
-    prefCustPrice: '190.00',
-    senMilPrice: '200.00',
-    retailPrice: '210.00',
+    price: '124.99',
   },
   {
     key: '01-014',
     title: 'Labor - Additional Man, 3 Hour',
     description: 'Code: 01-014',
-    clubPrice: '536.00',
-    prefCustPrice: '569.00',
-    senMilPrice: '599.00',
-    retailPrice: '630.00',
+    price: '124.99',
   },
   {
     key: '01-015',
     title: 'Expedited Part(s) Delivery - Local',
     description: 'Code: 01-015',
-    call: 'Call for price',
+    price: '124.99',
   },
   {
     key: '01-016',
     title: 'Shipping & handling (OEM Overnight)',
     description: 'Code: 01-016',
-    call: 'Call for price',
-  },  
+    price: '124.99',
+  },
   {
     key: '01-017',
     title: 'Internal Labor rate per Hour for "Go-Backs" on Install Dept.',
     description: 'Code: 01-017',
-    clubPrice: '105.00',
-    prefCustPrice: '105.00',
-    senMilPrice: '105.00',
-    retailPrice: '105.00',
+    price: '124.99',
   },
   {
     key: '01-018',
     title: 'Warranty Labor Rate Bryant',
     description: 'Code: 01-018',
-    clubPrice: '',
-    prefCustPrice: '',
-    senMilPrice: '',
-    retailPrice: '',
+    price: '124.99',
   },
   {
     key: '01-019',
     title: 'Warranty Labor Rate Generac/Honeywell',
     description: 'Code: 01-019',
-    clubPrice: '',
-    prefCustPrice: '',
-    senMilPrice: '',
-    retailPrice: '',
+    price: '124.99',
   },
   {
     key: '01-020',
     title: 'Warranty Labor Rate JB & Associates',
     description: 'Code: 01-020',
-    clubPrice: '125.00',
-    prefCustPrice: '125.00',
-    senMilPrice: '125.00',
-    retailPrice: '125.00',
+    price: '124.99',
   },
   {
     key: '01-021',
     title: 'Customer Satisfaction',
     description: 'Code: 01-021',
-    clubPrice: '',
-    prefCustPrice: '',
-    senMilPrice: '',
-    retailPrice: '',
+    price: '124.99',
   },
   {
     key: '01-022',
     title: 'Install Filter - Labor Only (no service call fee)',
     description: 'Code: 01-022',
-    clubPrice: '48.00',
-    prefCustPrice: '51.00',
-    senMilPrice: '54.00',
-    retailPrice: '57.00',
+    price: '124.99',
   }
 ].map(d => Object.assign(d));
 
-class ItemDetails extends Component {
+class HvacItems extends Component {
 
   render() {
-
     const generateItem = (i) => (
       <View style={styles.cell} key={i.key}>
-        <ModalWindow 
-          title={i.title}
-          description={i.description} 
-          clubPrice={i.clubPrice} 
-          prefCustPrice={i.prefCustPrice}
-          senMilPrice={i.senMilPrice}
-          retailPrice={i.retailPrice}
-          >
-        </ModalWindow>
+          <View style={styles.row}>
+            <View style={styles.textContainer}>
+            <ModalWindow>
+              <Text style={styles.title} numberOfLines={2}>
+                {i.title}
+              </Text>
+
+              <Text style={styles.description} numberOfLines={1}>
+                {i.description}
+              </Text>
+            </ModalWindow>
+            </View>
+          </View>
       </View>
     );
     return (
@@ -230,4 +167,4 @@ class ItemDetails extends Component {
 }
 
 
-export default ItemDetails;
+export default HvacItems;

@@ -14,11 +14,11 @@ export default StyleSheet.create({
     flex: 1, 
     backgroundColor: '#006bb6', 
   },
-	button: {
-		fontSize: 30,
-		paddingRight: 10,
-		paddingTop: 2
-	},
+  button: {
+    fontSize: 30,
+    paddingRight: 10,
+    paddingTop: 2
+  },
   priceButton: {
     height: 50, 
     marginTop: 50,
