@@ -16,41 +16,8 @@ import {
 
 import styles from './styles';
 import ItemDetails from '../ItemDetails';
+import ItemDetailButton from '../ItemDetailButton';
 
-class Button extends Component {
-  state = {
-    active: false,
-  };
-
-  _onHighlight = () => {
-    this.setState({active: true});
-  };
-
-  _onUnhighlight = () => {
-    this.setState({active: false});
-  };
-
-  render(props) {
-    var colorStyle = {
-      color: this.state.active ? '#fff' : '#000',
-    };
-
-    return (
-
-      <TouchableHighlight
-        onHideUnderlay={this._onUnhighlight}
-        onPress={this.props.onPress}
-        onShowUnderlay={this._onHighlight}
-        style={[styles.button, this.props.style]}
-        underlayColor="#a9d9d4">
-        <View>
-          <Text style={[styles.rowTitle, colorStyle]}>{this.props.title}</Text>
-          <Text style={[styles.buttonText, colorStyle]}>{this.props.description}</Text>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-}
 
 class ModalWindow extends Component {
   state = {
@@ -106,20 +73,19 @@ class ModalWindow extends Component {
                   <Text style={styles.textStyle}>Retail: ${this.props.retailPrice}</Text>                
                 </TouchableHighlight>
 
-                <Button
-                  onPress={this._setModalVisible.bind(this, false)}
-                  style={styles.modalButton}>
-                  <Text style={{color: 'black'}}>Close</Text>
-                </Button>
+                <ItemDetailButton
+                  onPress={this._setModalVisible.bind(this, false)} >
+                    <Text >Close</Text>
+                </ItemDetailButton>
               </View>
             </View>
           </Modal>
 
-          <Button 
+          <ItemDetailButton 
             onPress={this._setModalVisible.bind(this, true)} 
-            title={this.props.title}
-            description = {this.props.description}
-          ></Button> 
+            title={this.props.description}
+            description = {this.props.title}
+          ></ItemDetailButton> 
           
         </View>
       );

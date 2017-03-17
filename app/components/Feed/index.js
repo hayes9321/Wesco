@@ -5,7 +5,6 @@
 */ 
 
 import { 
-
   View, 
   Platform, 
   NavigationExperimental,
@@ -27,6 +26,7 @@ import HvacItems from '../HvacItems';
 import Tankless from '../Tankless';
 import TanklessItems from '../TanklessItems';
 import ItemDetails from '../ItemDetails';
+import PriceTotal from '../PriceTotal';
 import { actions } from 'react-native-navigation-redux-helpers';
 
 
@@ -60,6 +60,7 @@ class Feed extends Component {
     this._onGeneratorSelect = this._onGeneratorSelect.bind(this);
     this._onHvacSelect = this._onHvacSelect.bind(this);
     this._onTanklessSelect = this._onTanklessSelect.bind(this);
+    this._getPrice = this._getPrice.bind(this);
   }
 
   render() {
@@ -78,7 +79,8 @@ class Feed extends Component {
   _renderHeader(props) {
     const showHeader = props.scene.route.title &&
       (Platform.OS === 'ios' || props.scene.route.key === 'details' || props.scene.route.key === 'FireplaceItems') 
-      || props.scene.route.key === 'Generator' || props.scene.route.key === 'Hvac' || props.scene.route.key === 'Tankless' ;
+      || props.scene.route.key === 'Generator' || props.scene.route.key === 'Hvac' || props.scene.route.key === 'Tankless'
+      || props.scene.route.key === 'PriceTotal';
 
     if (showHeader) {
       return (
@@ -139,7 +141,7 @@ class Feed extends Component {
           <Hvac onSelectItem={this._onHvacSelect} />
           <Tankless onSelectItem={this._onTanklessSelect} />
           
-        <TouchableOpacity style={ styles.priceButton }>
+        <TouchableOpacity style={ styles.priceButton } onPress={this._getPrice}>
             <Text style={ styles.priceBtnTxt }>Get Price</Text>
         </TouchableOpacity>
         </View>
@@ -192,6 +194,14 @@ class Feed extends Component {
       return (
         <View style={{flex:1}}>   
           <TanklessItems />
+        </View>
+      );
+    }
+
+    if (props.scene.route.key === 'PriceTotal') {
+      return (
+        <View style={{flex:1}}>   
+          <PriceTotal />
         </View>
       );
     }
@@ -255,7 +265,6 @@ class Feed extends Component {
       title: 'Hvac Details',
       showBackButton: true
     }, navigation.key));
-    console.log('pressed');
   }
 
   _onTanklessSelect() {
@@ -265,6 +274,16 @@ class Feed extends Component {
     dispatch(pushRoute({
       key: 'Tankless',
       title: 'Tankless Details',
+      showBackButton: true
+    }, navigation.key));
+  }
+
+  _getPrice() {
+    const { dispatch, navigation } = this.props;
+    //intiate dispatch funtion for pushRoute.
+    dispatch(pushRoute({
+      key: 'PriceTotal',
+      title: 'Price Total',
       showBackButton: true
     }, navigation.key));
   }

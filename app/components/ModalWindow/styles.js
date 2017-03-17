@@ -21,6 +21,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
+    backgroundColor: 'white',
     flexGrow: 1,
     height: 70,
     overflow: 'hidden',
@@ -33,6 +34,9 @@ export default StyleSheet.create({
     margin: 5,
   },
   modalButton: {
+    backgroundColor: 'red',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
     marginTop: 10,
   },
   itemSelect: {

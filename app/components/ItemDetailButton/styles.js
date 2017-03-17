@@ -16,27 +16,34 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
-  rowTitle: {
-    flex: 1,
+  rowTitle: { 
+    flexDirection:'row',
     fontWeight: 'bold',
   },
   button: {
-    borderRadius: 5,
+    backgroundColor: 'white',
     flexGrow: 1,
-    height: 60,
-    alignSelf: 'stretch',
+    height: 70,
     overflow: 'hidden',
+    margin:5,
+    paddingTop:8,
+  },
+  descriptionText: {
+    color: 'black',
+    fontWeight:'bold',
+    fontSize: 16,
+    margin: 5,
   },
   buttonText: {
     color: 'black',
-    fontSize: 17,
+    fontSize: 15,
     margin: 5,
   },
   modalButton: {
+    backgroundColor: 'red',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
     marginTop: 10,
-  },
-  pickerItem: {
-    fontSize: 16,
   },
   itemSelect: {
     alignSelf: 'stretch',
@@ -53,8 +60,5 @@ export default StyleSheet.create({
   textStyle: {
     color: 'black',
     fontSize: 20,
-  },
-  colorStyle: {
-    color: 'black',
   },
 });

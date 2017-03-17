@@ -17,8 +17,7 @@ import {
 import styles from './styles';
 import ItemDetails from '../ItemDetails';
 
-
-class ListItemButton extends Component {
+class ItemDetailButton extends Component {
   state = {
     active: false,
   };
@@ -31,7 +30,7 @@ class ListItemButton extends Component {
     this.setState({active: false});
   };
 
-  render(props) {
+  render() {
     var colorStyle = {
       color: this.state.active ? '#fff' : '#000',
     };
@@ -44,19 +43,12 @@ class ListItemButton extends Component {
         style={[styles.button, this.props.style]}
         underlayColor="#a9d9d4">
         <View>
+          <Text style={[styles.descriptionText, colorStyle]}>{this.props.description}</Text>
           <Text style={[styles.buttonText, colorStyle]}>{this.props.title}</Text>
-          <Text style={[styles.buttonText, colorStyle]}>{this.props.description}</Text>
+          <Text style={[styles.button, colorStyle]}>{this.props.children}</Text>
         </View>
       </TouchableHighlight>
     );
   }
 }
-export default ListItemButton;
-
-              // <Text style={styles.title} numberOfLines={2}>
-              //   {i.title}
-              // </Text>
-
-              // <Text style={styles.description} numberOfLines={1}>
-              //   {i.description}
-              // </Text>
+export default ItemDetailButton;
