@@ -1,8 +1,9 @@
-/**
+
+/*
  * Sample React Native App
  * https://github.com/facebook/react-native
  * @flow
- */
+*/
 
 import React, { Component } from 'react';
 import {
@@ -17,7 +18,13 @@ import {
 import styles from './styles';
 import ItemDetails from '../ItemDetails';
 import ItemDetailButton from '../ItemDetailButton';
+import { connect } from 'react-redux';
+import { bindActionCreators }from 'redux';
+import actions from '../../actions';
 
+const {
+  addItem
+} = actions
 
 class ModalWindow extends Component {
   state = {
@@ -33,6 +40,14 @@ class ModalWindow extends Component {
     super(props);
   }
 
+  _selectItemPrice(props){
+    const {dispatch} = this.props;
+
+    dispatch(addItem({
+      itemInfo: this.props,
+      itemSelected: props
+    }))
+  }
 
   render(props) {
     var modalBackgroundStyle = {
@@ -57,19 +72,19 @@ class ModalWindow extends Component {
                 
                 <Text style={styles.headerStyle}>{this.props.title}</Text>
 
-                <TouchableHighlight style={styles.itemSelect}>
+                <TouchableHighlight style={styles.itemSelect} onPress={this._selectItemPrice.bind(this, this.props.clubPrice)}>
                   <Text style={styles.textStyle}>Club Price: ${this.props.clubPrice}</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.itemSelect}>
+                <TouchableHighlight style={styles.itemSelect} onPress={this._selectItemPrice.bind(this, this.props.prefCustPrice)}>
                   <Text style={styles.textStyle}>Prefered Customer: ${this.props.prefCustPrice}</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.itemSelect}>
+                <TouchableHighlight style={styles.itemSelect} onPress={this._selectItemPrice.bind(this, this.props.senMilPrice)}>
                   <Text style={styles.textStyle}>Senior/Military: ${this.props.senMilPrice}</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.itemSelect}>
+                <TouchableHighlight style={styles.itemSelect} onPress={this._selectItemPrice.bind(this, this.props.retailPrice)}>
                   <Text style={styles.textStyle}>Retail: ${this.props.retailPrice}</Text>                
                 </TouchableHighlight>
 
@@ -92,4 +107,21 @@ class ModalWindow extends Component {
   }
 }
 
-export default ModalWindow;
+function mapStateToProps(state){
+  return{
+    itemSelectedState: state
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ModalWindow);
+
+
+
+
+
