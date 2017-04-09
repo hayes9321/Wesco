@@ -67,7 +67,7 @@ class ModalWindow extends Component {
             visible={this.state.modalVisible}
             onRequestClose={() => this._setModalVisible(false)}
             >
-            <View style={[styles.container, modalBackgroundStyle]}>
+            <View style={[styles.container, modalBackgroundStyle]} >
               <View style={[styles.innerContainer, innerContainerTransparentStyle]}>
                 
                 <Text style={styles.headerStyle}>{this.props.title}</Text>

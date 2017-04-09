@@ -1,17 +1,29 @@
 
 
 function getId(state){
-  console.log(state)
-
   return state.itemSelected.reduce((maxId, i) => {
     return Math.max(i.id, maxId)
-  }, -1) + 1
+  }, 0) + 1
 }
 
-let ModalState = (state = {itemSelected: [] }, action) => {
+function calcItemsInPrice(state, price){
+  return state.priceTotal.reduce((prev, price) =>{
+    return price + prev
+  }, 0) + price;
+}
+
+function calcItemsInGmcPrice(state, price){
+  return state.gmcPriceTotal.reduce((prev, price) =>{
+    return price + prev
+  }, 0) + price;
+}
+
+let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: [] }, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
       return Object.assign({}, state, {
+        priceTotal: [calcItemsInPrice(state, action.payload.itemSelected)],
+        gmcPriceTotal: [calcItemsInGmcPrice(state, action.payload.itemInfo.clubPrice)],
         itemSelected:[{
           id: getId(state),
           active: true,
@@ -23,5 +35,10 @@ let ModalState = (state = {itemSelected: [] }, action) => {
       return state
   }
 }
+
+// selectors
+// export function isInCart(state, props) {
+//     return state.ModalState.itemSelected.indexOf(props.id) !== -1;
+// }
 
 export default ModalState;

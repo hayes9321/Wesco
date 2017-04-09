@@ -12,7 +12,8 @@ import actions from '../../actions';
 class PriceTotal extends Component {
 
     render(){
-    
+    let total = this.props.itemSelectedState.priceTotal - this.props.itemSelectedState.gmcPriceTotal;
+    //parseInt, add, return summary
     //create price calc function
 
     const generatePriceList = ( i ) => (
@@ -68,7 +69,7 @@ class PriceTotal extends Component {
           </View>
 
           <View style={styles.price}>
-            <Text style={styles.gmcPrice}>+59.00</Text>
+            <Text style={styles.gmcPrice}>${total}</Text>
           </View>
 
         </View>
@@ -81,11 +82,11 @@ class PriceTotal extends Component {
           </View>
 
           <View style={styles.price}>
-            <Text style={styles.regularPrice}>$327.00</Text>
+            <Text style={styles.regularPrice}>${this.props.itemSelectedState.priceTotal}</Text>
           </View>
 
           <View style={styles.price}>
-            <Text style={styles.gmcPrice}>$386.00</Text>
+            <Text style={styles.gmcPrice}>${this.props.itemSelectedState.gmcPriceTotal}</Text>
           </View>
 
         </View>
