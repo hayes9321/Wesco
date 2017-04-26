@@ -7,6 +7,7 @@
 import { 
   View, 
   Platform, 
+  InteractionManager,
   NavigationExperimental,
   TouchableHighlight, 
   Text,
@@ -61,9 +62,21 @@ class Feed extends Component {
     this._onHvacSelect = this._onHvacSelect.bind(this);
     this._onTanklessSelect = this._onTanklessSelect.bind(this);
     this._getPrice = this._getPrice.bind(this);
+    this.state = { renderPlaceHolderOnly: true };
+  }
+
+  componentDidMount(){
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({renderPlaceHolderOnly: false});
+    });
   }
 
   render() {
+
+    if(this.state.renderPlaceHolderOnly) {
+      return this._renderPlaceholderView();
+    }
+
     return (
       <NavigationCardStack
         onNavigate={ () => {} }
@@ -207,6 +220,13 @@ class Feed extends Component {
     }
   }
 
+  _renderPlaceholderView() {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 //ACTIONS///////////////////////////////////////////
 
 

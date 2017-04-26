@@ -8,7 +8,7 @@ function getId(state){
 
 function calcItemsInPrice(state, price){
   return state.priceTotal.reduce((prev, price) =>{
-    return price + prev
+    return price + prev;
   }, 0) + price;
 }
 
@@ -20,10 +20,10 @@ function calcItemsInGmcPrice(state, price){
 
 let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: [] }, action) => {
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_ITEM': 
       return Object.assign({}, state, {
-        priceTotal: [calcItemsInPrice(state, action.payload.itemSelected)],
-        gmcPriceTotal: [calcItemsInGmcPrice(state, action.payload.itemInfo.clubPrice)],
+        priceTotal: [calcItemsInPrice(state, parseFloat(action.payload.itemSelected))],
+        gmcPriceTotal: [calcItemsInGmcPrice(state, parseFloat(action.payload.itemInfo.clubPrice))],
         itemSelected:[{
           id: getId(state),
           active: true,

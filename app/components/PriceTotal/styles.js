@@ -65,4 +65,7 @@ export default StyleSheet.create({
     color:'black',
     fontWeight: 'bold',
   },
+  swipeButton:{
+    backgroundColor: 'white',
+  },
 });
