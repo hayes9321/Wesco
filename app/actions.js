@@ -5,10 +5,10 @@ const actions = {
       payload: itemInfo, itemSelected
     }
   },
-  removeItem: function(id){
+  removeItem: function(id, priceTotal, gmcPriceTotal){
     return{
       type:'REMOVE_ITEM',
-      payload: id
+      payload: id, priceTotal, gmcPriceTotal
     }
   }
 }

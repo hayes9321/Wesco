@@ -22,18 +22,20 @@ class PriceTotal extends Component {
   }
 
   _removePrice(pressedItem){
-    // console.log(pressedItem);
-      function findIndex(){
-        for(let i = 0; i < pressedItem.length; i++){
-          // if(pressedItem === pressedItem){
-            return pressedItem[i].id;
-          // }
-        }
-      } 
+
     const {dispatch} = this.props;
 
+    function findIndex(){
+      for(let i = 0; i < pressedItem.length; i++){
+          return pressedItem[i];
+      }
+    } 
+    console.log(findIndex(pressedItem).itemSelected);
+
     dispatch(removeItem({
-      id: findIndex(pressedItem)
+      id: findIndex(pressedItem).id,
+      priceTotal: findIndex(pressedItem).itemSelected,
+      gmcPriceTotal: findIndex(pressedItem).itemInfo.clubPrice
     }));
   }
     render(){

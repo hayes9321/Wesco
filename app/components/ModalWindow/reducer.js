@@ -14,8 +14,21 @@ function calcItemsInPrice(state, price){
 
 function calcItemsInGmcPrice(state, price){
   return state.gmcPriceTotal.reduce((prev, price) =>{
-    return price + prev
+    return price + prev;
   }, 0) + price;
+}
+
+function calcRemoveItemPrice(state, price){
+  return state.priceTotal.reduce((prev,price) =>{
+    return price - prev;
+  }, 0) - price;
+}
+
+
+function calcRemoveGmcItemPrice(state, price){
+  return state.gmcPriceTotal.reduce((prev,price) =>{
+    return price - prev;
+  }, 0) - price;
 }
 
 let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: [] }, action) => {
@@ -33,9 +46,12 @@ let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: []
       })
     case 'REMOVE_ITEM':
       return Object.assign({}, state, {
+        priceTotal: [calcRemoveItemPrice(state, parseFloat(action.payload.priceTotal))],
+        gmcPriceTotal: [calcRemoveGmcItemPrice(state, parseFloat(action.payload.gmcPriceTotal))],
         itemSelected: state.itemSelected.filter((item) =>{
           return item.id !== action.payload.id
         })
+
       })
     default:
       return state
