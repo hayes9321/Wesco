@@ -31,14 +31,15 @@ let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: []
           itemSelected: action.payload.itemSelected
         }, ...state.itemSelected]      
       })
+    case 'REMOVE_ITEM':
+      return Object.assign({}, state, {
+        itemSelected: state.itemSelected.filter((item) =>{
+          return item.id !== action.payload.id
+        })
+      })
     default:
       return state
   }
 }
-
-// selectors
-// export function isInCart(state, props) {
-//     return state.ModalState.itemSelected.indexOf(props.id) !== -1;
-// }
 
 export default ModalState;

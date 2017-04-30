@@ -35,7 +35,7 @@ class ModalWindow extends Component {
   _setModalVisible = (visible) => {
     this.setState({modalVisible: visible});
   };
-  
+   
   constructor(props) {
     super(props);
   }

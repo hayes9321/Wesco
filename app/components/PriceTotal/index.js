@@ -11,12 +11,37 @@ import { connect } from 'react-redux';
 import { bindActionCreators }from 'redux';
 import actions from '../../actions';
 
+const {
+  removeItem
+} = actions
+
 class PriceTotal extends Component {
+  constructor(props) {
+    super(props);
+    this._removePrice = this._removePrice.bind(this);
+  }
+
+  _removePrice(pressedItem){
+    // console.log(pressedItem);
+      function findIndex(){
+        for(let i = 0; i < pressedItem.length; i++){
+          // if(pressedItem === pressedItem){
+            return pressedItem[i].id;
+          // }
+        }
+      } 
+    const {dispatch} = this.props;
+
+    dispatch(removeItem({
+      id: findIndex(pressedItem)
+    }));
+  }
     render(){
 
     let swipeoutBtns = [
       {
-        text:'delete ?'
+        text:'delete ?',
+        onPress: () => {this._removePrice(this.props.itemSelectedState.itemSelected)}
       }
     ]
 
@@ -25,8 +50,8 @@ class PriceTotal extends Component {
     //create price calc function
 
     const generatePriceList = ( i ) => (
-      <Swipeout style={styles.swipeButton} right={swipeoutBtns}>
-        <View style={styles.priceContainer} key={i.id}>
+      <Swipeout style={styles.swipeButton} right={swipeoutBtns} id={i.id} key={i.id}>
+        <View style={styles.priceContainer}>
           
             <View style={styles.item}>
               <Text style={styles.itemText}>{i.itemInfo.title}</Text>
@@ -39,6 +64,7 @@ class PriceTotal extends Component {
             <View style={styles.price}>
               <Text style={styles.text}>${i.itemInfo.clubPrice}</Text>
             </View>
+
         </View>
       </Swipeout>
 
@@ -113,12 +139,13 @@ class PriceTotal extends Component {
 function mapStateToProps(state){
   return{
     itemSelectedState: state.get('itemSelected')
+
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
-    actions: bindActionCreators(actions, dispatch)
+    dispatch
   }
 }
 
