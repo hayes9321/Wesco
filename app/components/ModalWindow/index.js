@@ -45,7 +45,8 @@ class ModalWindow extends Component {
 
     dispatch(addItem({
       itemInfo: this.props,
-      itemSelected: props
+      itemSelected: props,
+      id: this.props.id
     }))
   }
 

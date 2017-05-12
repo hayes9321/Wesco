@@ -1,11 +1,3 @@
-
-
-function getId(state){
-  return state.itemSelected.reduce((maxId, i) => {
-    return Math.max(i.id, maxId)
-  }, 0) + 1
-}
-
 function calcItemsInPrice(state, price){
   return state.priceTotal.reduce((prev, price) =>{
     return price + prev;
@@ -31,17 +23,29 @@ function calcRemoveGmcItemPrice(state, price){
   }, 0) - price;
 }
 
+
+function itemAlreadySelected(state, currentId) {
+  for(var i = 0; i< state.itemSelected.length; i++){
+    if(state.itemSelected[i] !== currentId){
+      return state.itemSelected;
+    }
+  }
+}
+
+
 let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: [] }, action) => {
   switch (action.type) {
     case 'ADD_ITEM': 
+    console.log(itemAlreadySelected(state, action.payload.id))
       return Object.assign({}, state, {
         priceTotal: [calcItemsInPrice(state, parseFloat(action.payload.itemSelected))],
         gmcPriceTotal: [calcItemsInGmcPrice(state, parseFloat(action.payload.itemInfo.clubPrice))],
         itemSelected:[{
-          id: getId(state),
+          id: action.payload.id,
           active: true,
           itemInfo: action.payload.itemInfo,
           itemSelected: action.payload.itemSelected
+
         }, ...state.itemSelected]      
       })
     case 'REMOVE_ITEM':
@@ -54,7 +58,7 @@ let ModalState = (state = {priceTotal: [0], gmcPriceTotal: [0], itemSelected: []
 
       })
     default:
-      return state
+      return state;
   }
 }
 

@@ -20,6 +20,7 @@
     "react-addons-test-utils": "16.0.0-alpha.3",
     "react-dom": "16.0.0-alpha.6",
     "react-native": "^0.43.3",
+    "react-native-communications": "^2.2.1",
     "react-native-mock": "^0.3.1",
     "react-native-navigation-redux-helpers": "^0.5.0",
     "react-native-swipeout": "https://github.com/dancormier/react-native-swipeout.git",

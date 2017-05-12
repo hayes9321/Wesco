@@ -1,8 +1,8 @@
 const actions = {
-  addItem: function(itemInfo,itemSelected){
+  addItem: function(itemInfo,itemSelected, id){
     return{
       type: 'ADD_ITEM',
-      payload: itemInfo, itemSelected
+      payload: itemInfo, itemSelected, id
     }
   },
   removeItem: function(id, priceTotal, gmcPriceTotal){
